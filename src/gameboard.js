@@ -21,13 +21,14 @@ class Gameboard {
 
     placeShip(ship, coords, direction) {
         if (direction === 'vertical') {
-            this.placeShipVertical(ship, coords);
+            this.#placeShipVertical(ship, coords);
         } else if (direction === 'horizontal') {
-            this.placeShipHorizontal(ship, coords);
+            this.#placeShipHorizontal(ship, coords);
         }
+        this.ships.push(ship);
     }
 
-    placeShipVertical(ship, coords) {
+    #placeShipVertical(ship, coords) {
         let canPlaceShip = true;
         if (ship.length + coords[0] > this.board.length) {
             throw new Error('Ship placement is out of bounds');
@@ -48,7 +49,7 @@ class Gameboard {
         }
     }
 
-    placeShipHorizontal(ship, coords) {
+    #placeShipHorizontal(ship, coords) {
         let canPlaceShip = true;
         if (ship.length + coords[1] > this.board.length) {
             throw new Error('Ship placement is out of bounds');
@@ -69,6 +70,22 @@ class Gameboard {
         }
     }
 
+    receiveAttack(coords) {
+        if (this.board[coords[0]][coords[1]] !== null) {
+            this.board[coords[0]][coords[1]].hit();
+        } else {
+            this.missedAttacks.push(coords);
+        }
+    }
+
+    allShipsSunk() {
+        for (let ship of this.ships) {
+            if (!ship.isSunk()) {
+                return false; 
+            }
+        }
+        return true;
+    }
 }
 
 export default Gameboard
