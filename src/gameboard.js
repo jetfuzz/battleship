@@ -28,14 +28,44 @@ class Gameboard {
     }
 
     placeShipVertical(ship, coords) {
+        let canPlaceShip = true;
+        if (ship.length + coords[0] > this.board.length) {
+            throw new Error('Ship placement is out of bounds');
+        }
         for (let i = 0; i < ship.length; i++) {
-            this.board[coords[0] + i][coords[1]] = ship;
+            if (this.board[coords[0] + i][coords[1]] !== null) {
+                canPlaceShip = false;
+                break;
+            } 
+        }
+
+        if (canPlaceShip) {
+            for (let i = 0; i < ship.length; i++) {
+                this.board[coords[0] + i][coords[1]] = ship;
+            }
+        } else {
+            throw new Error('Ship placement overlaps with another ship');
         }
     }
 
     placeShipHorizontal(ship, coords) {
+        let canPlaceShip = true;
+        if (ship.length + coords[1] > this.board.length) {
+            throw new Error('Ship placement is out of bounds');
+        }
         for (let i = 0; i < ship.length; i++) {
-            this.board[coords[0]][coords[1] + i] = ship;
+            if (this.board[coords[0]][coords[1] + i] !== null) {
+                canPlaceShip = false;
+                break;
+            } 
+        }
+
+        if (canPlaceShip) {
+            for (let i = 0; i < ship.length; i++) {
+                this.board[coords[0]][coords[1] + i] = ship;
+            }
+        } else {
+            throw new Error('Ship placement overlaps with another ship');
         }
     }
 
