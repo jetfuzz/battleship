@@ -25,7 +25,6 @@ class Gameboard {
         } else if (direction === 'horizontal') {
             this.#placeShipHorizontal(ship, coords);
         }
-        this.ships.push(ship);
     }
 
     #placeShipVertical(ship, coords) {
@@ -43,6 +42,7 @@ class Gameboard {
         if (canPlaceShip) {
             for (let i = 0; i < ship.length; i++) {
                 this.board[coords[0] + i][coords[1]] = ship;
+                this.ships.push(ship);
             }
         } else {
             throw new Error('Ship placement overlaps with another ship');
@@ -64,6 +64,7 @@ class Gameboard {
         if (canPlaceShip) {
             for (let i = 0; i < ship.length; i++) {
                 this.board[coords[0]][coords[1] + i] = ship;
+                this.ships.push(ship);
             }
         } else {
             throw new Error('Ship placement overlaps with another ship');
