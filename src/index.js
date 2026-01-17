@@ -1,5 +1,13 @@
 import Player from "./player";
 import "./style.css";
+import * as dom from './dom'
 
-const player1 = new Player('human');
-const computer = new Player('computer');
+window.addEventListener("load", () => {
+  dom.renderStartScreen();
+});
+
+document.body.addEventListener('click', (e) => {
+    if (e.target.closest('#start-game-btn')) {
+        dom.renderPlacementScreen();
+    }
+})
