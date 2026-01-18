@@ -1,6 +1,7 @@
 export {
     renderStartScreen,
-    renderPlacementScreen
+    renderPlacementScreen,
+    renderBoard
 }
 
 function clearDisplay() {
@@ -25,6 +26,20 @@ function renderStartScreen() {
 
 function renderPlacementScreen() {
     clearDisplay()
+    let placementScreenDiv = document.getElementById('placement-screen');
+    placementScreenDiv.innerHTML = `
+        <div class="message">Place your fleet</div>
+        <div class="placement-buttons">
+            <button class="active">X Axis</button>
+            <button>Y Axis</button>
+        </div>
+        <div class="gameboard" id="placement-gameboard"></div>
+        <div class="placement-buttons">
+            <button>Randomize</button>
+            <button>Reset</button>
+            <button>Confirm</button>
+        </div>
+    `
 }
 
 function renderGameScreen() {
@@ -35,6 +50,18 @@ function renderEndScreen() {
 
 }
 
-function renderBoard() {
-    
+function renderBoard(gameboard, containerId) {
+    const container = document.getElementById(containerId);
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            let cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.dataset.row = i;
+            cell.dataset.col = j;
+            container.appendChild(cell)
+            if (gameboard.board[i][j] !== null) {
+                cell.classList.add('active');
+            }
+        }
+    }
 }
