@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import Player from '../src/player.js';
 import Gameboard from '../src/gameboard.js';
 
