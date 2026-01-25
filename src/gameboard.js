@@ -74,7 +74,6 @@ class Gameboard {
     }
 
     receiveAttack(coords) {
-        //check if coordinate has already received attack
         const alreadyMissed = this.missedAttacks.some(a => coords.every((v, i) => v === a[i]));
         const alreadyHit = this.hitAttacks.some(a => coords.every((v, i) => v === a[i]));
 

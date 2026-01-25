@@ -1,4 +1,3 @@
-import { experiments } from 'webpack';
 import Gameboard from '../src/gameboard.js';
 import Ship from '../src/ship.js';
 
@@ -66,7 +65,7 @@ describe('Gameboard', () => {
 
       expect(() => {
         gameboard.receiveAttack([2, 2]);
-      }).toThrow();
+      }).toThrow('Cannot attack');
       expect(ship.hitCount).toBe(1);
     });
 

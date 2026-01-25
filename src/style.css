@@ -54,12 +54,15 @@ body {
   color: rgb(221, 221, 221);
   display: flex;
   justify-content: center;
+  align-items: center;
   font-weight: 600;
+  min-height: 100vh;
 }
+
+/* start screen */
 
 #start-screen  {
   text-align: center;
-  margin-top: 12%;
 }
 
 h1 {
@@ -79,7 +82,7 @@ button {
 }
 
 #start-game-btn {
-  margin-top: 95px;
+  margin-top: 65px;
   font-size: 1.3rem;
 }
 
@@ -93,10 +96,18 @@ button.active {
   color: black;
 }
 
+
 .message {
   text-align: center;
   font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid white;
+  /* background-color: lightskyblue; */
+  /* color: black; */
 }
+
+/* placement section */
 
 .placement-buttons {
   display: flex;
@@ -107,6 +118,8 @@ button.active {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   border: 1px solid rgb(148, 148, 148);
+  margin: 30px;
+  margin-top: 10px;
 }
 
 .cell {
@@ -121,5 +134,30 @@ button.active {
 }
 
 .cell.active {
-  background-color: lightblue;
+  background-color: lightskyblue;
+}
+
+.enemy > .cell.active {
+  background-color: #0e2a47;
+}
+
+.enemy > .cell.active:hover {
+  background-color: grey;
+}
+
+/* game section */
+
+#game-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gameboards {
+  display: flex;
+}
+
+.fleet-para {
+  font-size: 1.1rem;
+  padding-left: 34px;
 }

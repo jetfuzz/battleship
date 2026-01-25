@@ -1,6 +1,7 @@
 export {
     renderStartScreen,
     renderPlacementScreen,
+    renderGameScreen,
     renderBoard
 }
 
@@ -16,16 +17,16 @@ function clearDisplay() {
 }
 
 function renderStartScreen() {
-    clearDisplay()
+    clearDisplay();
     let startScreenDiv = document.getElementById('start-screen');
     startScreenDiv.innerHTML = `
         <h1>BATTLESHIP</h1>
         <button id="start-game-btn">Start Game</button>
-    `
+    `;
 }
 
 function renderPlacementScreen() {
-    clearDisplay()
+    clearDisplay();
     let placementScreenDiv = document.getElementById('placement-screen');
     placementScreenDiv.innerHTML = `
         <div class="message">Place your fleet</div>
@@ -37,13 +38,27 @@ function renderPlacementScreen() {
         <div class="placement-buttons">
             <button>Randomize</button>
             <button>Reset</button>
-            <button>Confirm</button>
+            <button id="placement-confirm-btn">Confirm</button>
         </div>
-    `
+    `;
 }
 
 function renderGameScreen() {
-    
+    clearDisplay();
+    let GameScreenDiv = document.getElementById('game-screen');
+    GameScreenDiv.innerHTML = `
+        <div class="gameboards">
+            <div class="gameboard-container">
+                <p class="fleet-para">YOUR FLEET</p>
+                <div class="gameboard" id="p1-gameboard"></div>
+            </div>
+            <div class="gameboard-container">
+                <p class="fleet-para">ENEMY FLEET</p>
+                <div class="gameboard enemy" id="p2-gameboard"></div>
+            </div>
+        </div>
+        <div class="message">Your Turn</div>
+    `;
 }
 
 function renderEndScreen() {
