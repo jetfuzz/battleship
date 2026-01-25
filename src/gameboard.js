@@ -2,6 +2,7 @@ class Gameboard {
     constructor() {
         this.board = this.#createBoard();
         this.missedAttacks = [];
+        this.hitAttacks = [];
         this.ships = [];
     }
 
@@ -24,6 +25,7 @@ class Gameboard {
             this.#placeShipVertical(ship, coords);
         } else if (direction === 'horizontal') {
             this.#placeShipHorizontal(ship, coords);
+            this.ships.push(ship);
         }
     }
 
@@ -41,8 +43,8 @@ class Gameboard {
 
         if (canPlaceShip) {
             for (let i = 0; i < ship.length; i++) {
-                this.board[coords[0] + i][coords[1]] = ship;
                 this.ships.push(ship);
+                this.board[coords[0] + i][coords[1]] = ship;
             }
         } else {
             throw new Error('Ship placement overlaps with another ship');
@@ -62,9 +64,9 @@ class Gameboard {
         }
 
         if (canPlaceShip) {
+            this.ships.push(ship);
             for (let i = 0; i < ship.length; i++) {
                 this.board[coords[0]][coords[1] + i] = ship;
-                this.ships.push(ship);
             }
         } else {
             throw new Error('Ship placement overlaps with another ship');
@@ -72,8 +74,17 @@ class Gameboard {
     }
 
     receiveAttack(coords) {
+        //check if coordinate has already received attack
+        const alreadyMissed = this.missedAttacks.some(a => coords.every((v, i) => v === a[i]));
+        const alreadyHit = this.hitAttacks.some(a => coords.every((v, i) => v === a[i]));
+
+        if (alreadyHit || alreadyMissed) {
+            throw new Error('Cannot attack same coordinate twice');
+        }
+
         if (this.board[coords[0]][coords[1]] !== null) {
             this.board[coords[0]][coords[1]].hit();
+            this.hitAttacks.push(coords);
         } else {
             this.missedAttacks.push(coords);
         }

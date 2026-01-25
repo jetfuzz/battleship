@@ -1,3 +1,4 @@
+import { experiments } from 'webpack';
 import Gameboard from '../src/gameboard.js';
 import Ship from '../src/ship.js';
 
@@ -51,10 +52,21 @@ describe('Gameboard', () => {
 
     test('Record landed attacks', () => {
       let ship = new Ship(3);
-
-      gameboard.placeShip(ship, [2, 2], 'horizontal')
+      gameboard.placeShip(ship, [2, 2], 'horizontal');
       gameboard.receiveAttack([2, 2]);
 
+      expect(ship.hitCount).toBe(1);
+      expect(gameboard.hitAttacks).toContainEqual([2, 2]);
+    });
+
+    test("Cannot attack the same coordinates twice", () => {
+      let ship = new Ship(3);
+      gameboard.placeShip(ship, [2, 2], 'horizontal');
+      gameboard.receiveAttack([2, 2]);
+
+      expect(() => {
+        gameboard.receiveAttack([2, 2]);
+      }).toThrow();
       expect(ship.hitCount).toBe(1);
     });
 
