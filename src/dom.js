@@ -67,15 +67,22 @@ function renderEndScreen() {
 
 function renderBoard(gameboard, containerId) {
     const container = document.getElementById(containerId);
+    container.innerHTML = ``;
     for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
             let cell = document.createElement('div');
             cell.className = 'cell';
             cell.dataset.row = i;
             cell.dataset.col = j;
-            container.appendChild(cell)
+            container.appendChild(cell);
             if (gameboard.board[i][j] !== null) {
                 cell.classList.add('active');
+            }
+            if (gameboard.missedAttacks.some(a => [i,j].every((v, idx) => v === a[idx]))) {
+                cell.classList.add('miss');
+            }
+            if (gameboard.hitAttacks.some(a => [i,j].every((v, idx) => v === a[idx]))) {
+                cell.classList.add('hit');
             }
         }
     }

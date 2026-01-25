@@ -103,8 +103,6 @@ button.active {
   border-radius: 8px;
   padding: 10px;
   border: 1px solid white;
-  /* background-color: lightskyblue; */
-  /* color: black; */
 }
 
 /* placement section */
@@ -128,11 +126,6 @@ button.active {
   height: 50px;
 }
 
-.cell:hover {
-  background-color: grey;
-  cursor: pointer;
-}
-
 .cell.active {
   background-color: lightskyblue;
 }
@@ -141,8 +134,22 @@ button.active {
   background-color: #0e2a47;
 }
 
+.cell:hover,
 .enemy > .cell.active:hover {
   background-color: grey;
+  cursor: pointer;
+}
+
+.cell.miss,
+.enemy > .cell.miss {
+  background-color: rgba(0, 0, 255, 0.822);
+  pointer-events: none;
+}
+
+.cell.hit,
+.enemy > .cell.hit {
+  background-color: rgba(255, 0, 0, 0.836);
+  pointer-events: none;
 }
 
 /* game section */
