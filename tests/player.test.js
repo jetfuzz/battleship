@@ -7,4 +7,13 @@ describe('Player', () => {
     const player = new Player('human');
     expect(player.gameboard).toBeInstanceOf(Gameboard);
   });
+
+  test('Can make a random move', () => {
+    const computer = new Player('computer');
+    const gameboard = new Gameboard();
+
+    computer.makeRandomMove(gameboard);
+    const gameboardHitCount = gameboard.hitAttacks.length + gameboard.missedAttacks.length;
+    expect(gameboardHitCount).toBeGreaterThan(0)
+  });
 });
