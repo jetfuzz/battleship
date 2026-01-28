@@ -49,16 +49,20 @@ function renderGameScreen() {
     GameScreenDiv.innerHTML = `
         <div class="gameboards">
             <div class="gameboard-container">
-                <p class="fleet-para">YOUR FLEET</p>
+                <p class="fleet-para">Your Fleet</p>
                 <div class="gameboard" id="p1-gameboard"></div>
             </div>
             <div class="gameboard-container">
-                <p class="fleet-para">ENEMY FLEET</p>
+                <p class="fleet-para">Enemy Fleet</p>
                 <div class="gameboard enemy" id="p2-gameboard"></div>
             </div>
         </div>
-        <div class="message">Your Turn</div>
+        <div class="message" id="message">Your Turn</div>
     `;
+}
+
+function updateMessage() {
+
 }
 
 function renderEndScreen() {

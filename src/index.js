@@ -50,4 +50,45 @@ document.body.addEventListener("click", (e) => {
     dom.renderBoard(player.gameboard, "p1-gameboard");
     dom.renderBoard(computer.gameboard, "p2-gameboard");
   }
+  if (currentPlayer === player) {
+    if (e.target.closest(".cell")) {
+      if (e.target.closest(".enemy")) {
+        handleAttack(e.target);
+        setTimeout(() => {
+          handleComputerMove();
+        }, 2000);
+      }
+    }
+  }
 });
+
+function switchCurrentPlayer () {
+  if (currentPlayer === player) {
+    currentPlayer = computer;
+  } else {
+    currentPlayer = player;
+  }
+}
+
+function handleAttack(cell) {
+  let row = Number(cell.dataset.row);
+  let col = Number(cell.dataset.col);
+
+  computer.gameboard.receiveAttack([row, col]);
+  dom.renderBoard(computer.gameboard, "p2-gameboard");
+
+  if (computer.gameboard.allShipsSunk()) {
+    alert("Player won, game over!");
+  }
+  switchCurrentPlayer();
+}
+
+function handleComputerMove() {
+  computer.makeRandomMove(player.gameboard);
+  dom.renderBoard(player.gameboard, "p1-gameboard");
+
+  if (player.gameboard.allShipsSunk()) {
+    alert("Computer won, game over!");
+  }
+  switchCurrentPlayer();
+}
