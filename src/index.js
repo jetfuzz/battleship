@@ -67,9 +67,7 @@ function handleAttack(cell) {
   dom.renderBoard(computer.gameboard, "p2-gameboard");
   dom.updateMessage(`Player ${message}`);
 
-  if (computer.gameboard.allShipsSunk()) {
-    alert("Player won, game over!");
-  }
+  checkGameOver(computer.gameboard);
   switchCurrentPlayer();
 }
 
@@ -78,8 +76,13 @@ function handleComputerMove() {
   dom.renderBoard(player.gameboard, "p1-gameboard");
   dom.updateMessage(`Enemy ${message}`);
 
-  if (player.gameboard.allShipsSunk()) {
-    alert("Computer won, game over!");
-  }
+  checkGameOver(player.gameboard);
   switchCurrentPlayer();
+}
+
+function checkGameOver(gameboard) {
+  if (gameboard.allShipsSunk()) {
+    alert("Game over!");
+    //dom.renderEndScreen();
+  }
 }

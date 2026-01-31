@@ -3,6 +3,7 @@ export {
     renderPlacementScreen,
     renderGameScreen,
     updateMessage,
+    renderEndScreen,
     renderBoard
 }
 
@@ -67,8 +68,9 @@ function updateMessage(newText) {
     message.innerHTML = newText;
 }
 
-function renderEndScreen() {
-
+function renderEndScreen(player) {
+    //display which player won
+    //disable clicks on gameboards
 }
 
 function renderBoard(gameboard, containerId) {
@@ -82,8 +84,13 @@ function renderBoard(gameboard, containerId) {
             cell.dataset.col = j;
             container.appendChild(cell);
             if (gameboard.board[i][j] !== null) {
+                console.log()
                 cell.classList.add('active');
+                if (gameboard.board[i][j].isSunk()) {
+                    cell.innerHTML = '&#10060;'
+                }
             }
+
             if (gameboard.missedAttacks.some(a => [i,j].every((v, idx) => v === a[idx]))) {
                 cell.classList.add('miss');
             }
