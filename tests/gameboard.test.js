@@ -89,5 +89,28 @@ describe('Gameboard', () => {
 
       expect(gameboard.allShipsSunk()).toBe(false);
     });
+
+    test('Record when one ship has been sunk', () => {
+      let ship = new Ship(2);
+
+      gameboard.placeShip(ship, [2, 2], 'horizontal')
+      gameboard.receiveAttack([2, 2]);
+      const result = gameboard.receiveAttack([2, 3]);
+
+      expect(result).toBe("ship a unk");
+    });
+
+    test('Missed attacks return `miss` message', () => {
+      const result = gameboard.receiveAttack([3, 3]);
+      expect(result).toBe("miss");
+    });
+
+    test('Landed attacks return `hit` message', () => {
+      let ship = new Ship(2);
+      gameboard.placeShip(ship, [2, 2], 'horizontal');
+      const result = gameboard.receiveAttack([2, 2]);
+
+      expect(result).toBe("hit");
+    });
   });
 });

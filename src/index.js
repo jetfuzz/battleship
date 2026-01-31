@@ -74,8 +74,9 @@ function handleAttack(cell) {
   let row = Number(cell.dataset.row);
   let col = Number(cell.dataset.col);
 
-  computer.gameboard.receiveAttack([row, col]);
+  let message = computer.gameboard.receiveAttack([row, col]);
   dom.renderBoard(computer.gameboard, "p2-gameboard");
+  dom.updateMessage(`Player ${message}`);
 
   if (computer.gameboard.allShipsSunk()) {
     alert("Player won, game over!");
@@ -84,8 +85,9 @@ function handleAttack(cell) {
 }
 
 function handleComputerMove() {
-  computer.makeRandomMove(player.gameboard);
+  let message = computer.makeRandomMove(player.gameboard);
   dom.renderBoard(player.gameboard, "p1-gameboard");
+  dom.updateMessage(`Enemy ${message}`);
 
   if (player.gameboard.allShipsSunk()) {
     alert("Computer won, game over!");

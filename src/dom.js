@@ -2,18 +2,19 @@ export {
     renderStartScreen,
     renderPlacementScreen,
     renderGameScreen,
+    updateMessage,
     renderBoard
 }
 
 function clearDisplay() {
     let startScreenDiv = document.getElementById('start-screen');
-    let PlacementScreenDiv = document.getElementById('placement-screen');
-    let GameScreenDiv = document.getElementById('game-screen');
-    let EndScreenDiv = document.getElementById('end-screen');
+    let placementScreenDiv = document.getElementById('placement-screen');
+    let gameScreenDiv = document.getElementById('game-screen');
+    let endScreenDiv = document.getElementById('end-screen');
     startScreenDiv.innerHTML = '';
-    PlacementScreenDiv.innerHTML = '';
-    GameScreenDiv.innerHTML = '';
-    EndScreenDiv.innerHTML = '';
+    placementScreenDiv.innerHTML = '';
+    gameScreenDiv.innerHTML = '';
+    endScreenDiv.innerHTML = '';
 }
 
 function renderStartScreen() {
@@ -53,16 +54,17 @@ function renderGameScreen() {
                 <div class="gameboard" id="p1-gameboard"></div>
             </div>
             <div class="gameboard-container">
-                <p class="fleet-para">Enemy Fleet</p>
+                <p class="fleet-para">Enemy Waters</p>
                 <div class="gameboard enemy" id="p2-gameboard"></div>
             </div>
         </div>
-        <div class="message" id="message">Your Turn</div>
+        <p class="message" id="message">Your Turn</p>
     `;
 }
 
-function updateMessage() {
-
+function updateMessage(newText) {
+    let message = document.getElementById("message");
+    message.innerHTML = newText;
 }
 
 function renderEndScreen() {

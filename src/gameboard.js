@@ -25,7 +25,6 @@ class Gameboard {
             this.#placeShipVertical(ship, coords);
         } else if (direction === 'horizontal') {
             this.#placeShipHorizontal(ship, coords);
-            this.ships.push(ship);
         }
     }
 
@@ -43,9 +42,9 @@ class Gameboard {
 
         if (canPlaceShip) {
             for (let i = 0; i < ship.length; i++) {
-                this.ships.push(ship);
                 this.board[coords[0] + i][coords[1]] = ship;
             }
+            this.ships.push(ship);
         } else {
             throw new Error('Ship placement overlaps with another ship');
         }
@@ -64,10 +63,10 @@ class Gameboard {
         }
 
         if (canPlaceShip) {
-            this.ships.push(ship);
             for (let i = 0; i < ship.length; i++) {
                 this.board[coords[0]][coords[1] + i] = ship;
             }
+            this.ships.push(ship);
         } else {
             throw new Error('Ship placement overlaps with another ship');
         }
@@ -84,8 +83,15 @@ class Gameboard {
         if (this.board[coords[0]][coords[1]] !== null) {
             this.board[coords[0]][coords[1]].hit();
             this.hitAttacks.push(coords);
+
+            if (this.board[coords[0]][coords[1]].isSunk()) {
+                return "sunk a ship!";
+            }
+            return "hits!";
+
         } else {
             this.missedAttacks.push(coords);
+            return "misses!";
         }
     }
 
@@ -96,6 +102,10 @@ class Gameboard {
             }
         }
         return true;
+    }
+
+    randomizePlacement(fleet) {
+        
     }
 }
 

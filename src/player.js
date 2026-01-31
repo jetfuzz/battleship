@@ -17,8 +17,9 @@ class Player {
       const alreadyHit = enemyGameboard.hitAttacks.some(a => [row, col].every((v, i) => v === a[i]));
       
       if (!alreadyHit && !alreadyMissed) {
-        enemyGameboard.receiveAttack([row, col]);
+        const result = enemyGameboard.receiveAttack([row, col]);
         validMove = true;
+        return result;
       }
     }
   }
