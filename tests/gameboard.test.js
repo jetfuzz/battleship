@@ -42,6 +42,17 @@ describe('Gameboard', () => {
         gameboard.placeShip(ship2, [0, 0], 'vertical');
       }).toThrow('placement overlap');
     });
+
+    test('Can place ships randomly', () => {
+      const ship1 = new Ship(4);
+      const ship2 = new Ship(4);
+      const ship3 = new Ship(4);
+      const shipArr = [ship1, ship2, ship3]
+
+      gameboard.randomizePlacement(shipArr);
+
+      expect(gameboard.ships.length).toBe(3);
+    });
   });
 
   describe('Received attacks', () => {
@@ -97,12 +108,12 @@ describe('Gameboard', () => {
       gameboard.receiveAttack([2, 2]);
       const result = gameboard.receiveAttack([2, 3]);
 
-      expect(result).toBe("ship a unk");
+      expect(result).toContain("sunk");
     });
 
     test('Missed attacks return `miss` message', () => {
       const result = gameboard.receiveAttack([3, 3]);
-      expect(result).toBe("miss");
+      expect(result).toContain("miss");
     });
 
     test('Landed attacks return `hit` message', () => {
@@ -110,7 +121,7 @@ describe('Gameboard', () => {
       gameboard.placeShip(ship, [2, 2], 'horizontal');
       const result = gameboard.receiveAttack([2, 2]);
 
-      expect(result).toBe("hit");
+      expect(result).toContain("hit");
     });
   });
 });

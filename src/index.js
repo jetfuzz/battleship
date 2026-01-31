@@ -24,17 +24,8 @@ const playerFleet = [pCarrier, pBattleship, pDestroyer, pSubmarine, pPatrolBoat]
 const computerFleet = [cCarrier, cBattleship, cDestroyer, cSubmarine, cPatrolBoat];
 
 
-player.gameboard.placeShip(playerFleet[0], [0, 1], "horizontal");
-player.gameboard.placeShip(playerFleet[1], [3, 0], "horizontal");
-player.gameboard.placeShip(playerFleet[2], [1, 7], "vertical");
-player.gameboard.placeShip(playerFleet[3], [5, 5], "horizontal");
-player.gameboard.placeShip(playerFleet[4], [7, 0], "horizontal");
-
-computer.gameboard.placeShip(computerFleet[0], [1, 1], "horizontal");
-computer.gameboard.placeShip(computerFleet[1], [4, 0], "horizontal");
-computer.gameboard.placeShip(computerFleet[2], [1, 8], "vertical");
-computer.gameboard.placeShip(computerFleet[3], [7, 6], "vertical");
-computer.gameboard.placeShip(computerFleet[4], [6, 0], "vertical");
+player.gameboard.randomizePlacement(playerFleet);
+computer.gameboard.randomizePlacement(computerFleet);
 
 window.addEventListener("load", () => {
   dom.renderStartScreen();
@@ -51,13 +42,11 @@ document.body.addEventListener("click", (e) => {
     dom.renderBoard(computer.gameboard, "p2-gameboard");
   }
   if (currentPlayer === player) {
-    if (e.target.closest(".cell")) {
-      if (e.target.closest(".enemy")) {
-        handleAttack(e.target);
-        setTimeout(() => {
-          handleComputerMove();
-        }, 2000);
-      }
+    if (e.target.closest(".cell") && e.target.closest(".enemy")) {
+      handleAttack(e.target);
+      setTimeout(() => {
+        handleComputerMove();
+      }, 2000); 
     }
   }
 });

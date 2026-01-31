@@ -23,7 +23,7 @@ class Gameboard {
     placeShip(ship, coords, direction) {
         if (direction === 'vertical') {
             this.#placeShipVertical(ship, coords);
-        } else if (direction === 'horizontal') {
+        } else {
             this.#placeShipHorizontal(ship, coords);
         }
     }
@@ -105,7 +105,22 @@ class Gameboard {
     }
 
     randomizePlacement(fleet) {
-        
+        fleet.forEach(ship => {
+            let shipPlaced = false;
+            
+            while (!shipPlaced) {
+                let direction = Math.round(Math.random()) === 0 ? 'vertical' : 'horizontal';
+                let row = Math.floor(Math.random() * 10);
+                let col = Math.floor(Math.random() * 10);
+
+                try {
+                    this.placeShip(ship, [row, col], direction);
+                    shipPlaced = true;
+                } catch (error) {
+                    continue;
+                }
+            }
+        });
     }
 }
 
