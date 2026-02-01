@@ -144,7 +144,7 @@ button.active {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.6rem;
+  font-size: 1.7rem;
 }
 
 .cell.active {
@@ -163,14 +163,18 @@ button.active {
 
 .cell.miss,
 .enemy > .cell.miss {
-  background-color: var(--miss);
+  color: var(--miss);
   pointer-events: none;
 }
 
 .cell.hit,
 .enemy > .cell.hit {
-  background-color: var(--hit);
+  color: var(--hit);
   pointer-events: none;
+}
+
+.cell.sunk {
+  font-size: 2.1rem;
 }
 
 /* game section */
@@ -188,4 +192,28 @@ button.active {
 .fleet-para {
   font-size: 1.1rem;
   padding-left: 34px;
+}
+
+/* end screen */
+#end-screen {
+  padding: 60px 110px;
+  background-color: var(--bg-main);
+  border-radius: 8px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  color: var(--text-main);
+}
+
+#end-screen > h3 {
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: 70px;
+}
+
+#end-screen > button {
+  display: block;
+  margin: auto;
+  text-align: center;
+  padding: 10px 30px;
 }

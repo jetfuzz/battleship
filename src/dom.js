@@ -4,7 +4,8 @@ export {
     renderGameScreen,
     updateMessage,
     renderEndScreen,
-    renderBoard
+    renderBoard,
+    closeModal
 }
 
 function clearDisplay() {
@@ -33,8 +34,7 @@ function renderPlacementScreen() {
     placementScreenDiv.innerHTML = `
         <div class="message">Place your fleet</div>
         <div class="placement-buttons">
-            <button class="active">X Axis</button>
-            <button>Y Axis</button>
+            
         </div>
         <div class="gameboard" id="placement-gameboard"></div>
         <div class="placement-buttons">
@@ -68,9 +68,25 @@ function updateMessage(newText) {
     message.innerHTML = newText;
 }
 
-function renderEndScreen(player) {
-    //display which player won
-    //disable clicks on gameboards
+function renderEndScreen(winner) {
+    const endGameModal = document.getElementById('end-screen');
+    console.log(winner);
+    let message;
+    if (winner.type === 'human') {
+        message = 'You win!';
+    } else {
+        message = 'You lose!';
+    }
+    endGameModal.innerHTML = `
+        <h3><i>${message}</i></h3>
+        <button id="new-game-btn">New Game</button>
+    `
+    endGameModal.showModal();
+}
+
+function closeModal() {
+    const endGameModal = document.getElementById('end-screen');
+    endGameModal.close();
 }
 
 function renderBoard(gameboard, containerId) {
@@ -86,16 +102,19 @@ function renderBoard(gameboard, containerId) {
             if (gameboard.board[i][j] !== null) {
                 console.log()
                 cell.classList.add('active');
-                if (gameboard.board[i][j].isSunk()) {
-                    cell.innerHTML = '&#10060;'
-                }
             }
 
             if (gameboard.missedAttacks.some(a => [i,j].every((v, idx) => v === a[idx]))) {
                 cell.classList.add('miss');
+                cell.innerHTML = '&#9679;';
             }
             if (gameboard.hitAttacks.some(a => [i,j].every((v, idx) => v === a[idx]))) {
                 cell.classList.add('hit');
+                cell.innerHTML = '&#9679;';
+                if (gameboard.board[i][j].isSunk()) {
+                    cell.innerHTML = '&#10060;';
+                    cell.classList.add('sunk');
+                }
             }
         }
     }
