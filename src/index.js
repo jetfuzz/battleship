@@ -23,8 +23,20 @@ function initializeGame() {
   const cSubmarine = new Ship(3);
   const cPatrolBoat = new Ship(2);
 
-  const playerFleet = [pCarrier, pBattleship, pDestroyer, pSubmarine, pPatrolBoat];
-  const computerFleet = [cCarrier, cBattleship, cDestroyer, cSubmarine, cPatrolBoat];
+  const playerFleet = [
+    pCarrier,
+    pBattleship,
+    pDestroyer,
+    pSubmarine,
+    pPatrolBoat,
+  ];
+  const computerFleet = [
+    cCarrier,
+    cBattleship,
+    cDestroyer,
+    cSubmarine,
+    cPatrolBoat,
+  ];
 
   player.gameboard.randomizePlacement(playerFleet);
   computer.gameboard.randomizePlacement(computerFleet);
@@ -41,6 +53,12 @@ document.body.addEventListener("click", (e) => {
     dom.renderPlacementScreen();
     dom.renderBoard(player.gameboard, "placement-gameboard");
   }
+  if (e.target.closest("#randomize-board-btn")) {
+    player.gameboard = new Gameboard();
+    computer.gameboard = new Gameboard();
+    initializeGame();
+    dom.renderBoard(player.gameboard, "placement-gameboard");
+  }
   if (e.target.closest("#placement-confirm-btn")) {
     dom.renderGameScreen();
     dom.renderBoard(player.gameboard, "p1-gameboard");
@@ -51,7 +69,7 @@ document.body.addEventListener("click", (e) => {
       handleAttack(e.target);
       setTimeout(() => {
         handleComputerMove();
-      }, 1500); 
+      }, 1500);
     }
   }
   if (e.target.closest("#new-game-btn")) {
@@ -62,7 +80,7 @@ document.body.addEventListener("click", (e) => {
   }
 });
 
-function switchCurrentPlayer () {
+function switchCurrentPlayer() {
   if (currentPlayer === player) {
     currentPlayer = computer;
   } else {
