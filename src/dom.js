@@ -118,7 +118,7 @@ function renderBoard(gameboard, containerId) {
         cell.classList.add("hit");
         cell.innerHTML = "&#9679;";
         if (gameboard.board[i][j].isSunk()) {
-          cell.innerHTML = "&#10060;";
+          cell.innerHTML = "&#10060;&#xFE0E;";
           cell.classList.add("sunk");
         }
       }
