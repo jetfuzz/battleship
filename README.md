@@ -11,3 +11,9 @@ A web-based Battleship game built with Test-Driven Development.
 
 ## Built With
 JavaScript • Jest • Webpack • HTML/CSS
+
+## Installation
+* `git clone https://github.com/jetfuzz/battleship.git`
+* `cd battleship`
+* `npm install`
+* `npm run dev`
